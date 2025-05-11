@@ -9,3 +9,6 @@ markup:
   diagram:
     mermaid:
       enable: true
+aches:
+  images:
+    dir: :cacheDir/images
