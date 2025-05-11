@@ -1,0 +1,11 @@
+baseURL: https://example.org/
+languageCode: en-us
+title: Blog
+theme: ["PaperMod"]
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+  diagram:
+    mermaid:
+      enable: true

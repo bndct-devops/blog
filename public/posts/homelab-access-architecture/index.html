@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Homelab Access Architecture: Tailscale, Caddy, and Custom Domains | Blog</title>
+<meta name="keywords" content="homelab, networking, tailscale, caddy, cloudflare, security, reverse proxy, VPN">
+<meta name="description" content="Details the architectural design for secure remote access to homelab services and their exposure via custom domains using Tailscale, Caddy, and Cloudflare.">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/posts/homelab-access-architecture/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.f49d66caae9ea0fd43f21f29e71a8d3e284517ed770f2aa86fa012953ad3c9ef.css" integrity="sha256-9J1myq6eoP1D8h8p5xqNPihFF&#43;13Dyqob6ASlTrTye8=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/homelab-access-architecture/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ startOnLoad: true });
+</script>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Blog (Alt + H)">Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      Homelab Access Architecture: Tailscale, Caddy, and Custom Domains
+      <span class="entry-hint" title="Draft">
+        <svg xmlns="http://www.w3.org/2000/svg" height="35" viewBox="0 -960 960 960" fill="currentColor">
+          <path
+            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+        </svg>
+      </span>
+    </h1>
+    <div class="post-description">
+      Details the architectural design for secure remote access to homelab services and their exposure via custom domains using Tailscale, Caddy, and Cloudflare.
+    </div>
+    <div class="post-meta"><span title='2025-05-11 20:26:55 +0200 CEST'>May 11, 2025</span>
+
+</div>
+  </header> 
+  <div class="post-content"><h2 id="system-overview">System Overview<a hidden class="anchor" aria-hidden="true" href="#system-overview">#</a></h2>
+<p>The primary objective of this setup is to provide secure and convenient access to internal homelab services from any location without direct exposure to the public internet. This is achieved by leveraging a trusted mesh VPN (Tailscale), a flexible reverse proxy (Caddy), and robust DNS management (Cloudflare).</p>
+<h2 id="core-components">Core Components<a hidden class="anchor" aria-hidden="true" href="#core-components">#</a></h2>
+<h3 id="tailscale-the-secure-network-fabric">Tailscale: The Secure Network Fabric<a hidden class="anchor" aria-hidden="true" href="#tailscale-the-secure-network-fabric">#</a></h3>
+<p>Tailscale establishes a private, encrypted mesh network connecting all authenticated devices and homelab servers.</p>
+<ul>
+<li><strong>Access Control</strong>: Remote access to any homelab service is exclusively facilitated through a client device connected to the Tailscale network. Direct public internet exposure of services is actively avoided.</li>
+<li><strong>Internal Routing</strong>: All inter-service communication within the homelab, including Caddy&rsquo;s forwarding of requests to backend services, occurs over Tailscale&rsquo;s encrypted tunnels using their respective Tailscale IP addresses.</li>
+</ul>
+<h3 id="caddy-reverse-proxy-and-ssl-automation">Caddy: Reverse Proxy and SSL Automation<a hidden class="anchor" aria-hidden="true" href="#caddy-reverse-proxy-and-ssl-automation">#</a></h3>
+<p>Caddy functions as the central reverse proxy within the Tailscale network.</p>
+<ul>
+<li><strong>Deployment</strong>: Caddy is deployed on a designated server within the Tailscale network.</li>
+<li><strong>Custom Domain Handling</strong>: It is configured to manage custom domain names (e.g., <code>jellyfin.bndct.dev</code>, <code>unraid.bndct.dev</code>), acting as the primary entry point for these domains.</li>
+<li><strong>Request Routing</strong>: Upon receiving a request for a custom domain, Caddy intelligently proxies the request to the corresponding internal homelab service. This routing is performed using the Tailscale IP address of the target service, ensuring traffic remains within the secure Tailscale mesh.</li>
+<li><strong>Automated HTTPS</strong>: Caddy automatically provisions and renews SSL certificates (e.g., via Let&rsquo;s Encrypt) for all configured custom domains. This ensures all client-to-Caddy connections are secured with HTTPS.</li>
+</ul>
+<h3 id="cloudflare-dns-domain-management-and-ssl-challenge-facilitator">Cloudflare DNS: Domain Management and SSL Challenge Facilitator<a hidden class="anchor" aria-hidden="true" href="#cloudflare-dns-domain-management-and-ssl-challenge-facilitator">#</a></h3>
+<p>Cloudflare serves as the authoritative DNS provider for the custom domain (<code>bndct.dev</code>).</p>
+<ul>
+<li><strong>DNS Resolution</strong>: Cloudflare manages the public DNS records for the custom domain. These records are configured to resolve to the Tailscale IP address of the Caddy server. This ensures that while DNS resolution is public, the resolved IP is only routable from within the Tailscale network.</li>
+<li><strong>DNS-01 Challenge Integration</strong>: Caddy leverages Cloudflare&rsquo;s API to perform the DNS-01 challenge required for SSL certificate validation. This automated process involves Caddy temporarily creating and verifying specific DNS TXT records via Cloudflare&rsquo;s API.</li>
+</ul>
+<h2 id="operational-flow">Operational Flow<a hidden class="anchor" aria-hidden="true" href="#operational-flow">#</a></h2>
+<p>The following steps outline the process for accessing a homelab service:</p>
+<ol>
+<li><strong>Client Connection</strong>: The user&rsquo;s client device establishes a connection to the Tailscale network.</li>
+<li><strong>DNS Query</strong>: The user initiates access by navigating to a custom domain (e.g., <code>plex.bndct.dev</code>) in their browser. The DNS query for this domain is resolved by Cloudflare, which returns the Tailscale IP address of the Caddy server.</li>
+<li><strong>Secure Tunnel to Caddy</strong>: The client, being connected to Tailscale, establishes a secure, encrypted connection (HTTPS) to Caddy&rsquo;s Tailscale IP address.</li>
+<li><strong>Caddy Reverse Proxy</strong>: Caddy receives the request. Based on the requested custom domain, it proxies the request to the specific homelab service using that service&rsquo;s dedicated Tailscale IP address.</li>
+<li><strong>Service Response</strong>: The homelab service processes the request and returns data to Caddy, which then transmits it back to the client device over the secure Tailscale tunnel, maintaining HTTPS encryption.</li>
+</ol>
+<h2 id="architectural-diagram">Architectural Diagram<a hidden class="anchor" aria-hidden="true" href="#architectural-diagram">#</a></h2>
+<p>The following diagram illustrates the described system architecture:</p>
+<p><img alt="Diagram" loading="lazy" src="/images/homelab.png"></p>
+<h3 id="configuration-advantages">Configuration Advantages<a hidden class="anchor" aria-hidden="true" href="#configuration-advantages">#</a></h3>
+<p>This architecture provides several significant advantages:</p>
+<ul>
+<li><strong>Enhanced Security</strong>: Services are not directly exposed to the public internet, minimizing the attack surface. All data transmission is secured by Tailscale&rsquo;s encryption and Caddy&rsquo;s HTTPS.</li>
+<li><strong>Streamlined Access</strong>: Access via memorable custom domain names eliminates the need for recalling specific IP addresses or port numbers.</li>
+<li><strong>Automated SSL Management</strong>: Caddy&rsquo;s automatic certificate provisioning and renewal simplify the management of HTTPS for all services.</li>
+<li><strong>Simplified Network Management</strong>: Complex router configurations such as port forwarding are eliminated.</li>
+<li><strong>Scalability</strong>: Integration of new services is straightforward, involving their addition to the Tailscale network and corresponding Caddy configuration.</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/homelab/">Homelab</a></li>
+      <li><a href="http://localhost:1313/tags/networking/">Networking</a></li>
+      <li><a href="http://localhost:1313/tags/tailscale/">Tailscale</a></li>
+      <li><a href="http://localhost:1313/tags/caddy/">Caddy</a></li>
+      <li><a href="http://localhost:1313/tags/cloudflare/">Cloudflare</a></li>
+      <li><a href="http://localhost:1313/tags/security/">Security</a></li>
+      <li><a href="http://localhost:1313/tags/reverse-proxy/">Reverse Proxy</a></li>
+      <li><a href="http://localhost:1313/tags/vpn/">VPN</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/">Blog</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
