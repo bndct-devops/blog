@@ -1,7 +1,7 @@
 ---
 date: '2025-05-11T20:26:55+02:00'
 title: "Homelab Access Architecture: Tailscale, Caddy, and Custom Domains"
-draft: true
+draft: false
 description: "Details the architectural design for secure remote access to homelab services and their exposure via custom domains using Tailscale, Caddy, and Cloudflare."
 tags: ["homelab", "networking", "tailscale", "caddy", "cloudflare", "security", "reverse proxy", "VPN"]
 categories: ["Homelab", "Networking"]
