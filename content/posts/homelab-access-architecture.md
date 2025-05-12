@@ -51,3 +51,79 @@ This architecture provides several significant advantages:
 - **Simplified Network Management**: Complex router configurations such as port forwarding are eliminated.
 - **Scalability**: Integration of new services is straightforward, involving their addition to the Tailscale network and corresponding Caddy configuration.
 
+---
+
+## How-To: Implementation Steps
+
+This section outlines the practical steps to set up the described homelab access architecture.
+
+### 1. Tailscale Setup
+
+Tailscale forms the secure backbone of your homelab network. All your homelab servers (including the one running Caddy) and client devices should be connected to your Tailscale network.
+
+* **For Unraid Users:** Many Unraid containers offer native Tailscale integration. When adding a new container that you wish to connect to Tailscale, simply tick the "Use Tailscale" checkbox during the container setup. Once the container starts, monitor its logs (e.g., Docker logs) for a Tailscale authentication link. Visit this link in your browser and approve the machine to join your Tailscale network.
+* **For Other Operating Systems:** For other Linux distributions, Windows, macOS, or Docker environments, follow the official Tailscale installation instructions. Generally, this involves running an installation script and then using `tailscale up` to authenticate and connect your device to your Tailscale network.
+
+Ensure all your homelab services that Caddy will proxy to have a unique Tailscale IP address within your network. Note down these IPs.
+
+### 2. Cloudflare API Token for DNS-01 Challenge
+
+Caddy uses a Cloudflare API token to automatically create and verify DNS TXT records for SSL certificate issuance.
+
+* **Create an API Token:** Refer to the official Cloudflare documentation on how to create an API Token.
+    * [Cloudflare API Tokens Documentation](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/)
+* **Required Permissions:** The token typically needs `Zone -> Zone -> Read` and `Zone -> DNS -> Edit` permissions for the specific zone (your custom domain, e.g., `bndct.dev`) that Caddy will manage.
+* **Store the Token:** It's crucial to store this token securely. For Caddy, it's often best to set it as an environment variable (e.g., `CLOUDFLARE_TOKEN`) on the server where Caddy is running.
+
+### 3. Caddy Installation and Configuration
+
+Caddy will act as your central reverse proxy. It should be installed on a server within your Tailscale network.
+
+* **Caddy Installation:** Install Caddy on your chosen server. You can use package managers (e.g., `sudo apt install caddy` on Debian/Ubuntu), Docker, or download pre-built binaries from the official Caddy website.
+* **Caddyfile Creation:** Create a `Caddyfile` (usually located at `/etc/caddy/Caddyfile` or in your working directory if running manually). This file defines your reverse proxy rules and SSL automation.
+
+    Here's an example `Caddyfile` that uses Cloudflare for DNS-01 challenges and proxies for Jellyfin:
+
+    ```caddyfile
+    # This block defines how Caddy performs the DNS-01 challenge using Cloudflare.
+    # It's a global snippet that can be imported into individual site blocks.
+    (cloudflare) {
+        tls {
+            dns cloudflare {$CLOUDFLARE_TOKEN} # Use the environment variable for your token
+            ca https://acme-v02.api.letsencrypt.org/directory
+        }
+    }
+
+    # Define your custom domain for Jellyfin
+    jellyfin.bndct.dev {
+        # Reverse proxy requests to your internal Jellyfin service's Tailscale IP and port
+        reverse_proxy http://100.123.68.68:8096
+        
+        # Import the Cloudflare DNS challenge configuration defined above
+        import cloudflare
+    }
+    ```
+    **Important:**
+    * Replace `jellyfin.bndct.dev` with your actual custom domain.
+    * Replace `100.123.68.68:8096` with the actual Tailscale IP address and port of your Jellyfin (or other) service.
+    * Ensure the `CLOUDFLARE_TOKEN` environment variable is set before Caddy starts (e.g., in your systemd service file, Docker Compose file, or shell profile).
+
+* **Running Caddy:**
+    * For testing, you can navigate to the directory containing your `Caddyfile` and run `caddy run`.
+    * For production, it's recommended to run Caddy as a system service (e.g., using `systemd` on Linux) to ensure it starts automatically and runs persistently.
+
+### 4. Cloudflare DNS `CNAME` Record Setup
+
+Even though access occurs over Tailscale, you still need public DNS records to direct traffic to Caddy's Tailscale IP. In this setup, a wildcard `CNAME` record simplifies management for multiple services.
+
+* **Create a Wildcard CNAME Record:** In your Cloudflare DNS management panel for `bndct.dev`, create an `CNAME` record for the wildcard entry (`*`) that points to the **Tailscale name of your Caddy server**. This ensures that any subdomain (e.g., `jellyfin.bndct.dev`) will resolve to your Caddy server.
+
+    | Type | Name | Content     | Proxy Status | TTL  |
+    | :--- | :--- | :---------- | :----------- | :--- |
+    | CNAME    | `*`  | `caddy.rohu-ruffe.ts.net` | DNS Only     | Auto |
+
+    * **Name:** This should be `*` (the asterisk).
+    * **Content:** This must be the **Tailscale name of your Caddy server**.
+    * **Proxy Status:** Ensure this is set to "DNS Only" (gray cloud icon) as Cloudflare's proxying would interfere with Tailscale.
+
+Once these steps are completed, your client device, when connected to Tailscale, should be able to resolve your custom domains and securely connect to your homelab services via Caddy.
