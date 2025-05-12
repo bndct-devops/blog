@@ -39,3 +39,5 @@ params:
       url: "https://github.com/bndct-devops/blog"
     - name: "LinkedIn"
       url: "https://www.linkedin.com/in/bndct-devops/"
+
+favicon: "favicon.ico"

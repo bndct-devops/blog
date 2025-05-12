@@ -1,110 +1,72 @@
 ---
-title: "About Me" # More specific title
-date: 2025-05-12T10:48:05+02:00 # Adjusted to current date and time
-draft: true
+title: "About Me"
+date: '2025-05-12T18:20:30+02:00'
+draft: false
 url: "/about/"
 author: "Benedict"
-description: "DevOps Engineer with 8+ years of experience specializing in automating internal tools to optimize costs, streamline workflows, and enhance developer efficiency." # Enhanced SEO description
+description: "DevOps Engineer with 8+ years of experience specializing in automating internal tools to optimize costs, streamline workflows, and enhance developer efficiency."
 ---
 
 👋 **Hello there! I'm Benedict.**
 
-As a **DevOps Engineer** with **8+ years of experience**, I specialize in **automating internal tools to optimize costs, streamline workflows, and enhance developer efficiency**. My passion lies in building robust, scalable, and efficient infrastructure that empowers development teams to deliver software faster and with higher quality.
+By day, I'm a **DevOps Engineer** with **8+ years of experience**, focused on **automating internal tools to optimize costs, streamline workflows, and enhance developer efficiency**. My professional journey has been centered around building robust, scalable, and efficient infrastructure that empowers development teams to deliver software faster and with higher quality.
 
-My journey has been focused on **bridging the gap between development and operations**, fostering a culture of automation, reliability, and continuous improvement. I'm adept at leveraging **Infrastructure as Code (IaC)**, containerization, and cloud platforms to create resilient and cost-effective systems.
+Beyond the professional world, I like to tinker in my homelab. It's my digital playground, a place to experiment with new technologies, solve intriguing problems, improve my quality of life, and build systems purely for the joy of creating and understanding.
 
-I believe in a collaborative approach, constant learning, and the power of automation to simplify complexity.
+---
+
+## 🌐 My Journey into Infrastructure & Automation
+
+It began with an **apprenticeship at ilogs mobile GmbH**, where I first dipped my toes into operations and got hands-on **experience** with system administration. This foundational experience quickly led me into the world of **DevOps at Bitmovin Inc.** Here, I spent nearly four years immersed in crafting CI/CD pipelines across various platforms, managing Google Managed Kubernetes clusters, and deploying automated testing clients with Ansible.
+
+Currently, as a **Senior DevOps Engineer at MeisterLabs GmbH**, I'm focused on creating and supporting advanced systems for autoscaling GitHub Action runners in GKE, implementing robust RBAC setups, and optimizing CI/CD pipelines that accelerate the development process for dozens of teams. My professional work constantly reinforces my belief in the power of automation, collaborative approaches, and the importance of continuous learning – principles I bring into my homelab endeavors.
+
+---
+
+## 💡 Beyond the Office: My Homelab & Personal Playground
+
+My homelab is where my passion for building and optimizing truly comes alive. It's a dynamic environment for continuous experimentation and a personal laboratory for understanding how systems truly work.
+
+My current setup is built around:
+
+* **TalosOS Cluster:** Multiple mini PCs form a cluster, allowing me to experiment with high availability and distributed systems on a small scale.
+* **Unraid Server:** For workloads that don’t require high availability, this server doubles as my central network storage, ensuring my data is organized and accessible. It's also a playground for services like Plex, HomeAssistant, and various Docker containers.
+
+I'm constantly experimenting and refining: from migrating services like Nginx to Caddy, to exploring different deployment methods for this very portfolio site.
+
+Here are some highlights of projects, both professional and personal, that showcase my drive for innovation and efficiency, embodying the same spirit of automation and problem-solving:
+
+* **Introducing Renovate:** Led the migration from Dependabot to Renovate, significantly improving dependency management efficiency and reliability across the company by overcoming Dependabot's limitations with Helm value files and providing broader support and control.
+
+* **Improving Security & Workflow Standardization:** Architected the implementation of Workload Identity for secure GitHub authentication to our Cloud Platform and established a centralized repository for shared GitHub Actions, fostering code reuse and enhancing maintainability for critical workflows like authentication and cache management.
+
+* **CI/CD Optimization & Automation:** Designed a unified system for building custom, rootless Docker images across diverse tech stacks. Developed a sophisticated build script that automates Dockerfile generation based on dependency lists and integrates with Renovate for automated image updates, resulting in faster build times and streamlined dependency management.
+
+* **Scalable CI Runner Infrastructure in GKE:** Developed a dynamic Helm Chart utilizing custom GitHub Actions Runner images, deployed as KEDA ScaledJobs for event-based auto-scaling. This innovation enabled our CI Runners to scale dynamically based on usage, leading to significant reductions in wasted resources and substantial cost improvements.
+
+---
+
+## 🛠️ My Digital Toolkit
+
+While my passion drives my exploration, I rely on a robust set of tools and technologies to bring my ideas to life, both professionally and in my homelab. This isn't an exhaustive list, but rather a snapshot of my go-to technologies that power my infrastructure and development workflows:
+
+* **System Administration:** Linux, Ubuntu, Bash, Ansible, Systemd/Launchd
+* **CI/CD & Automation:** CircleCI, Github Actions, Jenkins, Codeship, ArgoCD, Renovate, KEDA
+* **Containerization & Orchestration:** Docker, Docker Compose, Portainer, Kubernetes
+* **Cloud & Infrastructure:** GCP (GKE, Cloud Storage, LB, IAM), Cert-Manager, Traefik, Helm
+* **Networking:** OpenVPN, SNMP, Ubiquiti, Tailscale, Wireguard, Caddy, Nginx
+* **Monitoring:** Grafana, Prometheus, Glances
+* **Productivity & Collaboration:** Confluence, Jira, GitHub, Sonar, Linear
 
 ---
 
 ## 📍 Connect & Find Me
 
+I'm always open to connecting with fellow enthusiasts, sharing insights, or discussing new ideas. Feel free to reach out!
+
 * 📧 **Email:** [benedict@bndct.dev](mailto:benedict@bndct.dev)
-* 🔗 **LinkedIn:** [linkedin.com/in/yourprofile](https://linkedin.com/in/yourprofile) *(Remember to update this with your actual LinkedIn URL)*
-* 🐙 **GitHub:** [github.com/yourusername](https://github.com/yourusername) *(Remember to update this with your actual GitHub URL)*
+* 🔗 **LinkedIn:** [linkedin.com/in/bndct-devops](https://www.linkedin.com/in/bndct-devops)
+* 🐙 **GitHub:** [github.com/bndct-devops](https://github.com/bndct-devops)
 * 🗺️ **Location:** Klagenfurt am Wörthersee, Carinthia, Austria
-
----
-
-# 🛠️ My DevOps Toolkit & Expertise
-
-Here's a snapshot of the technologies and practices I leverage:
-
-### ⚙️ System Administration
-* Linux, Ubuntu, Bash, Ansible, Systemd/Launchd
-
-### 🚀 CI/CD
-* CircleCI, Github Actions, Jenkins, Codeship, ArgoCD, Renovate (OSS Dependabot), KEDA
-
-### 🐳 Containerization
-* Docker, Docker Compose, Portainer, Kubernetes
-
-### ☁️ Cloud Infrastructure
-* GCP (GKE, Cloud Storage, LB, IAM), Cert-Manager, Traefik, Helm
-
-### 🌐 Networking
-* OpenVPN, SNMP, Ubiquiti, Tailscale, Wireguard
-
-### 📊 Monitoring
-* Grafana, Prometheus
-
-### 💡 Tools
-* Confluence, Jira, GitHub, Sonar, Linear
-
----
-
-# 🚀 Professional Journey
-
-### **Senior DevOps Engineer** | MeisterLabs GmbH, Vienna
-December 2022 - PRESENT
-
-* **Creating and supporting:**
-    * Custom Helm charts for self-hosted Github Action runner in GKE that autoscale via KEDA.
-    * RBAC setup using Google Workspace Groups as source.
-    * Custom CI images with dependency management.
-* **Maintaining and optimizing dozens of CI/CD pipelines** to speed up development process.
-
----
-
-### **DevOps Engineer** | Bitmovin Inc, Klagenfurt
-February 2019 - December 2022
-
-* **Creating and supporting:**
-    * CI/CD pipelines with various different CI platforms.
-    * Google Managed Kubernetes clusters.
-    * Docker environments.
-* **Deploying test automation clients** for Smart TVs, Roku and other platforms via Ansible.
-* **Writing scripts** to automate various workflows in Bash, Python and Node.js.
-
----
-
-### **Operations Engineer** | ilogs mobile GmbH, Klagenfurt
-March 2018 - December 2018
-
----
-
-### **Apprenticeship** | ilogs mobile GmbH, Klagenfurt
-January 2016 - March 2018
-
----
-
-# ✨ Featured Projects
-
-Here are some key projects that highlight my contributions and expertise.
-
-### **Introducing Renovate**
-As a fan of open-source software, I led the migration from Dependabot to Renovate within the company. Dependabot struggled with certain dependencies, especially Helm value files. Renovate provided better automation, broader support for everything, and more control over update schedules, making dependency management significantly more efficient and reliable.
-
-### **Improving Security & Workflow Standardization**
-Implemented Workload Identity for secure GitHub authentication to our Cloud Platform. To avoid redundant code and improve maintainability, I led the effort to create a centralized repository for shared GitHub Actions containing custom actions for authenticating via Workload Identity, handling cache, and running previously mentioned Renovate workflows.
-
-### **CI/CD Optimization & Automation**
-Designed a unified system for building custom, rootless Docker images for multiple different tech stacks. Developed a build script that generates Dockerfiles based on team-specific dependency lists, using Renovate to automate image creation when dependencies change or new GitHub Actions Runner versions are released, resulting in reduced build times and improved dependency management.
-
-### **Scalable CI Runner Infrastructure in GKE**
-The setup consists of a dynamic Helm Chart making use of my own custom GitHub Actions Runner images. This, deployed as KEDA ScaledJobs for event-based auto-scaling, enabled scaling our CI Runners based on usage, resulting in less wasted resources and cost improvements.
-
-### **Personal Projects**
-My personal homelab consists of multiple mini PCs running as a cluster thanks to TalosOS. For workloads that don’t need to be high availability, I build an Unraid Server that doubles as a network storage. Beside the core services like HomeAssistant, Plex, and Tailscale, I regularly experiment with new technologies—for example, migrating from Nginx to Caddy or exploring different deployment methods for my portfolio site.
 
 ---
