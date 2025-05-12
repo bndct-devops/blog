@@ -12,3 +12,30 @@ markup:
 caches:
   images:
     dir: :cacheDir/images
+
+languages:
+  en:
+    languageName: "English"
+    weight: 1
+    taxonomies:
+      category: categories
+      tag: tags
+      series: series
+    menu:
+      main:
+        - name: Archive
+          url: archives
+          weight: 5
+        - name: About Me
+          url: about
+          weight: 10
+
+params:
+  homeInfoParams:
+    Title: Hi there 👋
+    Content: Welcome to my blog
+  socialIcons:
+    - name: "GitHub"
+      url: "https://github.com/bndct-devops/blog"
+    - name: "LinkedIn"
+      url: "https://www.linkedin.com/in/bndct-devops/"
