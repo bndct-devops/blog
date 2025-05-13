@@ -9,7 +9,7 @@ author: ["benedict"]
 showToc: true
 TocOpen: false
 cover:
-  image: images/cover_caddy.png
+  image: /images/cover_caddy.png
   hiddenInList: true
 ---
 
