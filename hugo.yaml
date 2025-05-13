@@ -1,4 +1,4 @@
-baseURL: https://example.org/
+baseURL: https://blog.bndct.dev/
 languageCode: en-us
 title: Blog
 theme: ["PaperMod"]
