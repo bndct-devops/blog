@@ -5,10 +5,16 @@ draft: false
 description: "Details the architectural design for secure remote access to homelab services and their exposure via custom domains using Tailscale, Caddy, and Cloudflare."
 tags: ["homelab", "networking", "tailscale", "caddy", "cloudflare", "security", "reverse proxy", "VPN"]
 categories: ["Homelab", "Networking"]
+author: ["benedict"]
+showToc: true
+TocOpen: false
+cover:
+  image: images/cover_caddy.png
+  hiddenInList: true
 ---
 
-## System Overview
-The primary objective of this setup is to provide secure and convenient access to internal homelab services from any location without direct exposure to the public internet. This is achieved by leveraging a trusted mesh VPN (Tailscale), a flexible reverse proxy (Caddy), and robust DNS management (Cloudflare).
+> The primary objective of this setup is to provide secure and convenient access to internal homelab services from any location without direct exposure to the public internet. This is achieved by leveraging a trusted mesh VPN (Tailscale), a flexible reverse proxy (Caddy), and robust DNS management (Cloudflare).
+---
 
 ## Core Components
 

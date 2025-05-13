@@ -2,6 +2,8 @@ baseURL: https://example.org/
 languageCode: en-us
 title: Blog
 theme: ["PaperMod"]
+favicon: "favicon.ico"
+
 markup:
   goldmark:
     renderer:
@@ -9,6 +11,7 @@ markup:
   diagram:
     mermaid:
       enable: true
+
 caches:
   images:
     dir: :cacheDir/images
@@ -31,6 +34,8 @@ languages:
           weight: 10
 
 params:
+  ShowReadingTime: true
+  ShowBreadCrumbs: true
   homeInfoParams:
     Title: Hi there 👋
     Content: Welcome to my blog
@@ -39,5 +44,3 @@ params:
       url: "https://github.com/bndct-devops/blog"
     - name: "LinkedIn"
       url: "https://www.linkedin.com/in/bndct-devops/"
-
-favicon: "favicon.ico"

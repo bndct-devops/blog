@@ -5,6 +5,7 @@ draft: false
 url: "/about/"
 author: "Benedict"
 description: "DevOps Engineer with 8+ years of experience specializing in automating internal tools to optimize costs, streamline workflows, and enhance developer efficiency."
+ShowBreadCrumbs: false
 ---
 
 👋 **Hello there! I'm Benedict.**
