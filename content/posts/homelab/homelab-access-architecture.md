@@ -9,7 +9,7 @@ author: ["benedict"]
 showToc: true
 TocOpen: false
 cover:
-  image: images/cover_caddy.png
+  image: "https://blog.bndct.dev/images/cover_caddy.png"
 ---
 
 > The primary objective of this setup is to provide secure and convenient access to internal homelab services from any location without direct exposure to the public internet. This is achieved by leveraging a trusted mesh VPN (Tailscale), a flexible reverse proxy (Caddy), and robust DNS management (Cloudflare).
