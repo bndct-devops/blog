@@ -36,6 +36,7 @@ languages:
 params:
   ShowReadingTime: true
   ShowBreadCrumbs: true
+  ShowFullTextinRSS: true
   homeInfoParams:
     Title: Hi there 👋
     Content: >
@@ -50,3 +51,11 @@ params:
       url: "https://github.com/bndct-devops/blog"
     - name: "LinkedIn"
       url: "https://www.linkedin.com/in/bndct-devops/"
+    - name: "rss"
+      url: "https://blog.bndct.dev/index.xml"
+
+outputs:
+  home:
+      - HTML
+      - RSS
+      - JSON
