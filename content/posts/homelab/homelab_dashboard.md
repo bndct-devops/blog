@@ -7,7 +7,7 @@ author: ["benedict"]
 showToc: true
 TocOpen: false
 cover:
-  image: "https://blog.bndct.dev/images/cover_unraid.png"
+  image: "https://blog.bndct.dev/images/cover_dashboard.png"
 ---
 
 # Battle of the Dashboards: Homepage vs. Homarr vs. Heimdall
