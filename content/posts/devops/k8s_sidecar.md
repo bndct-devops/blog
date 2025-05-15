@@ -46,7 +46,7 @@ You can see how that is aesthetically unappealing at best and potentially unreli
 
 # The solution is here
 
-It seems like I wasn't the only one having such a use case and being extremely unsatisfied with the solution. With the introduction of [KEP-753](https://github.com/kubernetes/enhancements/issues/753) and **Kubernetes v1.29**, Kubernetes now supports **true sidecar containers** — giving them distinct lifecycle behavior, better suited for real-world use cases.
+It seems like I wasn't the only one having such a use case and being extremely unsatisfied with the solution. With the introduction of [KEP-753](https://github.com/kubernetes/enhancements/issues/753) and **Kubernetes v1.29**, Kubernetes now supports [**true sidecar containers**](https://kubernetes.io/docs/concepts/workloads/pods/sidecar-containers/) — giving them distinct lifecycle behavior, better suited for real-world use cases.
 
 ---
 
