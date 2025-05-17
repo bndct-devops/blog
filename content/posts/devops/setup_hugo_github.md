@@ -8,6 +8,8 @@ categories: ["Homelab", "DevOps", "CI/CD", "GitHub Pages", "GitHub Actions", "Gi
 author: ["benedict"]
 showToc: true
 TocOpen: false
+cover:
+  image: "https://blog.bndct.dev/images/cover_hugo.png"
 ---
 
 ### Before we start
