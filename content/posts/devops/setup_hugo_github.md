@@ -96,7 +96,7 @@ git push -u origin main
 
 Create a file at `.github/workflows/hugo.yml` with the following content:
 
-```zsh
+```yaml
 name: Deploy Hugo site to GitHub Pages
 
 on:
