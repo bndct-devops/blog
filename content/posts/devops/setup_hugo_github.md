@@ -97,58 +97,58 @@ git push -u origin main
 Create a file at `.github/workflows/hugo.yml` with the following content:
 
 ```zsh
-    name: Deploy Hugo site to GitHub Pages
+name: Deploy Hugo site to GitHub Pages
 
-    on:
-      push:
-        branches: [main]
+on:
+  push:
+    branches: [main]
 
-    workflow_dispatch:
+workflow_dispatch:
 
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
-    jobs:
-      build:
-        runs-on: ubuntu-latest
-        env:
-          HUGO_VERSION: 0.147.1
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: 0.147.1
 
-        steps:
-        - uses: actions/checkout@v4
-          with:
-            submodules: recursive
-            fetch-depth: 0
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+        fetch-depth: 0
 
-        - name: Install Hugo CLI
-          run: |
-            wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
-            && sudo dpkg -i ${{ runner.temp }}/hugo.deb
+    - name: Install Hugo CLI
+      run: |
+        wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
+        && sudo dpkg -i ${{ runner.temp }}/hugo.deb
 
-        - name: Setup Pages
-          id: pages
-          uses: actions/configure-pages@v5
+    - name: Setup Pages
+      id: pages
+      uses: actions/configure-pages@v5
 
-        - name: Build
-          run: hugo --minify
+    - name: Build
+      run: hugo --minify
 
-        - name: Upload artifact
-          uses: actions/upload-pages-artifact@v3
-          with:
-            path: ./public
-    
-      deploy:
-        environment:
-          name: github-pages
-          url: ${{ steps.deployment.outputs.page_url }}
-        runs-on: ubuntu-latest
-        needs: build
-        steps:
-        - name: Deploy to GitHub Pages
-            id: deployment
-            uses: actions/deploy-pages@v4
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: ./public
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
 ```
 
 Go to your repository's **Settings > Pages** and set the source to:
