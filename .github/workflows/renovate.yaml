@@ -20,3 +20,5 @@ jobs:
         with:
           # Pass the GitHub token to Renovate
           token: ${{ secrets.GITHUB_TOKEN }}
+          repositories: | # Specify the repository to process
+            ${{ github.repository }}
