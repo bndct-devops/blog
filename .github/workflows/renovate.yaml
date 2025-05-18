@@ -17,6 +17,6 @@ jobs:
 
       - name: Run Renovate
         uses: renovatebot/github-action@v42.0.2
-        env:
+        with:
           # Pass the GitHub token to Renovate
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
