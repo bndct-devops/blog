@@ -11,6 +11,5 @@
       "depNameTemplate": "gohugoio/hugo"
     }
   ],
-  "automerge": true,
-  "platform": "github"
+  "automerge": true
 }
