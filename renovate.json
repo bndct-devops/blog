@@ -1,0 +1,16 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "regexManagers": [
+    {
+      "description": "Update Hugo version in hugo.yaml",
+      "fileMatch": ["(^|/)hugo\\.yaml$"],
+      "matchStrings": [
+        "HUGO_VERSION: (?<currentValue>.*)"
+      ],
+      "datasourceTemplate": "github-releases",
+      "depNameTemplate": "gohugoio/hugo"
+    }
+  ],
+  "automerge": true,
+  "platform": "github"
+}
