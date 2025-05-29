@@ -2,7 +2,9 @@
 date: '2025-05-14T23:04:26+02:00'
 draft: false
 title: 'Homelab Dashboard'
-description: "In the world of homelabbing - especially after one amasses a good amount of services - having a good dashboard is essential. "
+description: "In the world of homelabbing - especially after one amasses a good amount of services - having a good dashboard is essential."
+tags: ["homelab", "container", "monitoring", "dashboard"]
+categories: ["Homelab", "Container", "monitoring", "Dashboard"]
 author: ["benedict"]
 showToc: true
 TocOpen: false

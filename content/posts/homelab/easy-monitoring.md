@@ -3,6 +3,8 @@ date: '2025-05-21T20:54:26+02:00'
 draft: false
 title: 'Effortless Homelab Monitoring with Beszel'
 description: "My go-to solution for lightweight monitoring in a self-hosted environment"
+tags: ["homelab", "container", "monitoring"]
+categories: ["Homelab", "Container", "Monitoring"]
 author: ["benedict"]
 showToc: true
 TocOpen: false
