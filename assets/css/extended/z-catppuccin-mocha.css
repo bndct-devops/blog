@@ -1,0 +1,54 @@
+:root {
+    --catppuccin-mocha-rosewater: #f5e0dc;
+    --catppuccin-mocha-flamingo: #f2cdcd;
+    --catppuccin-mocha-pink: #f5c2e7;
+    --catppuccin-mocha-mauve: #cba6f7;
+    --catppuccin-mocha-red: #f38ba8;
+    --catppuccin-mocha-maroon: #eba0ac;
+    --catppuccin-mocha-peach: #fab387;
+    --catppuccin-mocha-yellow: #f9e2af;
+    --catppuccin-mocha-green: #a6e3a1;
+    --catppuccin-mocha-teal: #94e2d5;
+    --catppuccin-mocha-sky: #89dceb;
+    --catppuccin-mocha-sapphire: #74c7ec;
+    --catppuccin-mocha-blue: #89b4fa;
+    --catppuccin-mocha-lavender: #b4befe;
+    --catppuccin-mocha-text: #cdd6f4;
+    --catppuccin-mocha-subtext1: #bac2de;
+    --catppuccin-mocha-subtext0: #a6adc8;
+    --catppuccin-mocha-overlay2: #9399b2;
+    --catppuccin-mocha-overlay1: #7f849c;
+    --catppuccin-mocha-overlay0: #6c7086;
+    --catppuccin-mocha-surface2: #585b70;
+    --catppuccin-mocha-surface1: #45475a;
+    --catppuccin-mocha-surface0: #313244;
+    --catppuccin-mocha-base: #1e1e2e;
+    --catppuccin-mocha-mantle: #181825;
+    --catppuccin-mocha-crust: #11111b;
+}
+
+.dark {
+    --theme: var(--catppuccin-mocha-mantle);
+    --entry: var(--catppuccin-mocha-base);
+    --primary: var(--catppuccin-mocha-pink);
+    --secondary: var(--catppuccin-mocha-text);
+    --tertiary: var(--catppuccin-mocha-surface1);
+    --content: var(--catppuccin-mocha-text);
+    --code-bg: var(--catppuccin-mocha-crust);
+    --border: var(--catppuccin-mocha-surface0);
+    --link-color: var(--catppuccin-mocha-blue);
+    --link-hover-color: var(--catppuccin-mocha-sky);
+}
+
+.light {
+    --theme: var(--catppuccin-mocha-rosewater); /* Overall page background - very light */
+    --entry: var(--catppuccin-mocha-flamingo); /* Background for content cards/entries - slightly deeper light */
+    --primary: var(--catppuccin-mocha-mauve); /* Accent color for headings, etc. */
+    --secondary: var(--catppuccin-mocha-surface2); /* Secondary text color - darker for readability */
+    --tertiary: var(--catppuccin-mocha-overlay0); /* Subtle borders/dividers */
+    --content: var(--catppuccin-mocha-crust); /* Main text color - darkest for high contrast */
+    --code-bg: var(--catppuccin-mocha-surface0); /* Code block background - stands out but not jarring */
+    --border: var(--catppuccin-mocha-overlay1); /* General border color */
+    --link-color: var(--catppuccin-mocha-blue); /* Link color - consistent and vibrant */
+    --link-hover-color: var(--catppuccin-mocha-sapphire); /* Link hover color - slightly darker blue */
+}
