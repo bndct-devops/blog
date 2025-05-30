@@ -7,6 +7,6 @@ This repository hosts my personal tech blog and homelab portfolio, built with [H
 ## 🔧 Tech Stack
 
 - [Hugo](https://gohugo.io/) – Static Site Generator  
-- [PaperMod](https://github.com/adityatelange/hugo-PaperMod) – Hugo theme  
+- [PaperMod](https://github.com/adityatelange/hugo-PaperMod) – Hugo theme with custom CSS  
 - Markdown – for content creation  
 - GitHub Pages – for deployment  

@@ -11,6 +11,9 @@ markup:
   diagram:
     mermaid:
       enable: true
+  highlight:
+    style: catppuccin-mocha
+    
 
 caches:
   images:
@@ -37,6 +40,8 @@ params:
   ShowReadingTime: true
   ShowBreadCrumbs: true
   ShowFullTextinRSS: true
+  assets:
+    disableHighlightInlineStyle: true
   homeInfoParams:
     Title: Hi there 👋
     Content: >

@@ -27,28 +27,40 @@
     --catppuccin-mocha-crust: #11111b;
 }
 
-.dark {
+.dark { /* Make sure the dot is here */
     --theme: var(--catppuccin-mocha-mantle);
     --entry: var(--catppuccin-mocha-base);
     --primary: var(--catppuccin-mocha-pink);
     --secondary: var(--catppuccin-mocha-text);
     --tertiary: var(--catppuccin-mocha-surface1);
     --content: var(--catppuccin-mocha-text);
-    --code-bg: var(--catppuccin-mocha-crust);
     --border: var(--catppuccin-mocha-surface0);
     --link-color: var(--catppuccin-mocha-blue);
     --link-hover-color: var(--catppuccin-mocha-sky);
+
+    /* This is for TAGS (taxonomy terms), as per your clarification */
+    /* --code-bg: var(--catppuccin-mocha-crust); */ /* Example value, adjust as needed for tags */
+
+    /* === DEDICATED VARIABLE for actual code block background === */
+    /* Choose your desired background for code blocks: */
+    --custom-code-block-bg: var(--catppuccin-mocha-base); /* To use mantle */
+    /* --custom-code-block-bg: var(--catppuccin-mocha-base); */   /* To use base (this is what Chroma sets by default inline) */
 }
 
-.light {
-    --theme: var(--catppuccin-mocha-rosewater); /* Overall page background - very light */
-    --entry: var(--catppuccin-mocha-flamingo); /* Background for content cards/entries - slightly deeper light */
-    --primary: var(--catppuccin-mocha-mauve); /* Accent color for headings, etc. */
-    --secondary: var(--catppuccin-mocha-surface2); /* Secondary text color - darker for readability */
-    --tertiary: var(--catppuccin-mocha-overlay0); /* Subtle borders/dividers */
-    --content: var(--catppuccin-mocha-crust); /* Main text color - darkest for high contrast */
-    --code-bg: var(--catppuccin-mocha-surface0); /* Code block background - stands out but not jarring */
-    --border: var(--catppuccin-mocha-overlay1); /* General border color */
-    --link-color: var(--catppuccin-mocha-blue); /* Link color - consistent and vibrant */
-    --link-hover-color: var(--catppuccin-mocha-sapphire); /* Link hover color - slightly darker blue */
+/* Apply the --custom-code-block-bg variable to the actual code block elements */
+.dark div.highlight > pre,
+.dark pre {
+    background-color: var(--custom-code-block-bg) !important; /* !important is needed to override Chroma's inline style */
+}
+
+/* Ensure inner <code> tag doesn't have its own conflicting background.
+   The inline style on <pre> also sets the default text color (color:#cdd6f4;).
+   The syntax highlighting colors for specific tokens come from the "catppuccin-mocha" Chroma style. */
+.dark pre code {
+    background-color: transparent !important; /* This makes the <pre> background visible */
+    /* If you also wanted to override the default text color set by the inline style on <pre>
+       (not the syntax colors for tokens), you could do:
+       color: var(--your-desired-default-text-color-for-code) !important;
+       But usually, the color from the Chroma style (#cdd6f4) is fine as a base.
+    */
 }
