@@ -23,7 +23,7 @@ Unlike other DevOps-sy people, I actually like writing documentation. Both in my
 
 ![Diagram](images/excalidraw_example.png)
 
-I don't know about the others, but I prefer the example on the right way more. 
+I don't know about other people, but I prefer the example on the right way more. 
 
 ## What's so great about diagrams and graphics?
 
