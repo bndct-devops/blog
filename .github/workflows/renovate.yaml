@@ -36,3 +36,4 @@ jobs:
           RENOVATE_PLATFORM: github
           # Specify the repository to process
           RENOVATE_REPOSITORIES: ${{ github.repository }}
+          LOG_LEVEL: debug
