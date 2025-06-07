@@ -1,6 +1,5 @@
 {
   "extends": ["config:recommended"],
-  "branchProtection": true,
   "automerge": false,
   "prConcurrentLimit": 5,
   "gitAuthor": "renovate[bot] <renovate[bot]@users.noreply.github.com>",
