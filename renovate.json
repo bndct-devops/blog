@@ -5,10 +5,11 @@
       "description": "Update Hugo version in hugo.yaml",
       "fileMatch": ["(^|/)hugo\\.yaml$"],
       "matchStrings": [
-        "HUGO_VERSION: (?<currentValue>.*)"
+        "HUGO_VERSION:\\s*\"?(?<currentValue>[\\w\\.-]+)\"?"
       ],
       "datasourceTemplate": "github-releases",
-      "depNameTemplate": "gohugoio/hugo"
+      "depNameTemplate": "gohugoio/hugo",
+      "packageNameTemplate": "gohugoio/hugo"
     }
   ],
   "automerge": true
