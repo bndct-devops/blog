@@ -1,17 +1,14 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ],
+  "extends": ["config:recommended"],
+  "branchProtection": true,
+  "automerge": false,
+  "prConcurrentLimit": 5,
+  "gitAuthor": "renovate[bot] <renovate[bot]@users.noreply.github.com>",
   "customManagers": [
     {
       "customType": "regex",
-      "fileMatch": [
-        "^\\.github/workflows/[^/]+\\.ya?ml$"
-      ],
-      "matchStrings": [
-        "HUGO_VERSION:\\s*(?<currentValue>\\d+\\.\\d+\\.\\d+)"
-      ],
+      "fileMatch": ["^\\.github/workflows/[^/]+\\.ya?ml$"],
+      "matchStrings": ["HUGO_VERSION:\\s*(?<currentValue>\\d+\\.\\d+\\.\\d+)"],
       "depNameTemplate": "gohugoio/hugo",
       "datasourceTemplate": "github-releases"
     }
