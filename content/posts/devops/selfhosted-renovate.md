@@ -8,12 +8,12 @@ author: ["benedict"]
 showToc: true
 TocOpen: false
 cover:
-  image: "https://blog.bndct.dev/images/cover_renovate.svg"
+  image: "https://blog.bndct.dev/images/cover_renovate.png"
 ---
 
 ## Automatically Updating Versions in GitHub Actions Using Renovate
 
-Everyone starts of by never pinning their versions, relying on `:latest` till the day some dependency pops up and fucks whatever you are deploying. Afterwards, you start following best practices but encounter why so many people follow bad practices - like `:latest`. Manually updating dependencies is a pain in the ass.
+Everyone starts off by never pinning their versions, relying on `:latest` till the day some dependency pops up and fucks whatever you are deploying. Afterwards, you start following best practices but encounter why so many people follow bad practices - like `:latest`. Manually updating dependencies is a pain in the ass.
 
 Usually `Dependabot` does the job. And it would probably do here as well. But a while ago I started using `Renovate` at work and I became quiet a fan.
 
