@@ -65,7 +65,7 @@ While my passion drives my exploration, I rely on a robust set of tools and tech
 
 I'm always open to connecting with fellow enthusiasts, sharing insights, or discussing new ideas. Feel free to reach out!
 
-* 📧 **Email:** [benedict@bndct.dev](mailto:benedict@bndct.dev)
+* 📧 **Email:** [blog@bndct.dev](mailto:blog@bndct.dev)
 * 🔗 **LinkedIn:** [linkedin.com/in/bndct-devops](https://www.linkedin.com/in/bndct-devops)
 * 🐙 **GitHub:** [github.com/bndct-devops](https://github.com/bndct-devops)
 * 🗺️ **Location:** Klagenfurt am Wörthersee, Carinthia, Austria

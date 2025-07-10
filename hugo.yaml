@@ -56,6 +56,8 @@ params:
       url: "https://github.com/bndct-devops/blog"
     - name: "LinkedIn"
       url: "https://www.linkedin.com/in/bndct-devops/"
+    - name: "email"
+      url: "blog@bndct.dev"
     - name: "rss"
       url: "https://blog.bndct.dev/index.xml"
 
