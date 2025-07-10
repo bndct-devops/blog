@@ -57,7 +57,7 @@ params:
     - name: "LinkedIn"
       url: "https://www.linkedin.com/in/bndct-devops/"
     - name: "email"
-      url: "blog@bndct.dev"
+      url: "mailto:blog@bndct.dev"
     - name: "rss"
       url: "https://blog.bndct.dev/index.xml"
 
